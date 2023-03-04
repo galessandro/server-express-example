@@ -28,23 +28,27 @@ export default class UserInfraestructure implements UserRepository {
    }
 
    listOne(id: number): User {
-      return Object.assign(
+      const user: User = Object.assign(
          {},
          users.find((el: User) => el.properties().id === id),
       )
+      console.log('user list', user)
+      return user
    }
 
-   insert(user: User): void {
+   insert(user: User): User {
       console.log('user inserted', user)
+      return user
    }
 
-   update(user: User): void {
+   update(user: User): User {
       console.log('user updated', user)
-      //   user.update(user.properties())
+      return user
    }
 
-   delete(user: User): void {
+   delete(user: User): User {
       console.log('user deleted', user)
       user.delete()
+      return user
    }
 }
