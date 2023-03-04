@@ -9,8 +9,8 @@ export default class UserApplication {
       return this.userRepository.list()
    }
 
-   listOne(id: number) {
-      return this.userRepository.listOne(id)
+   listOne(guid: string) {
+      return this.userRepository.listOne(guid)
    }
 
    insert(user: User) {
@@ -19,9 +19,5 @@ export default class UserApplication {
 
    update(user: User) {
       return this.userRepository.update(user)
-   }
-
-   delete(user: User) {
-      return this.userRepository.delete(user)
    }
 }

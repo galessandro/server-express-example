@@ -3,7 +3,6 @@ import { UserRepository } from '../domain/user.repository'
 
 const users: User[] = [
    new User({
-      id: 1,
       name: 'German',
       lastname: 'Granados',
       email: 'granados@gmail.com',
@@ -12,7 +11,6 @@ const users: User[] = [
       refreshToken: 'abc123',
    }),
    new User({
-      id: 2,
       name: 'French',
       lastname: 'Granados',
       email: 'french@gmail.com',
@@ -23,32 +21,26 @@ const users: User[] = [
 ]
 
 export default class UserInfraestructure implements UserRepository {
-   list() {
+   list(): any {
       return users
    }
 
-   listOne(id: number): User {
+   listOne(guid: string): User {
       const user: User = Object.assign(
          {},
-         users.find((el: User) => el.properties().id === id),
+         users.find((el: User) => el.properties().guid === guid),
       )
       console.log('user list', user)
       return user
    }
 
-   insert(user: User): User {
+   insert(user: User): any {
       console.log('user inserted', user)
       return user
    }
 
-   update(user: User): User {
+   update(user: User): any {
       console.log('user updated', user)
-      return user
-   }
-
-   delete(user: User): User {
-      console.log('user deleted', user)
-      user.delete()
       return user
    }
 }

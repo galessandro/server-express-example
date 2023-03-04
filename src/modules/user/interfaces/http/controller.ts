@@ -6,7 +6,11 @@ export default class {
    constructor(private userApplication: UserApplication) {
       // design patt ern: links of methods
       //forma 1
-      // this.list = this.list.bind(this);
+      this.list = this.list.bind(this)
+      this.listOne = this.listOne.bind(this)
+      this.insert = this.insert.bind(this)
+      this.update = this.update.bind(this)
+      this.delete = this.delete.bind(this)
    }
 
    list(req: Request, res: Response) {
@@ -15,13 +19,12 @@ export default class {
    }
 
    listOne(req: Request, res: Response) {
-      const user = this.userApplication.listOne(1)
-      res.json(user)
+      //const user = this.userApplication.listOne(guid)
+      //res.json(user)
    }
 
    insert(req: Request, res: Response) {
       const properties: UserProperties = {
-         id: 1,
          name: 'John Doe',
          lastname: 'Doe',
          email: 'kenaa@example.com',
@@ -35,7 +38,6 @@ export default class {
 
    update(req: Request, res: Response) {
       const properties: UserProperties = {
-         id: 1,
          name: 'John Doe',
          lastname: 'Doe',
          email: 'kenaa@example.com',
@@ -49,7 +51,6 @@ export default class {
 
    delete(req: Request, res: Response) {
       const properties: UserProperties = {
-         id: 1,
          name: 'John Doe',
          lastname: 'Doe',
          email: 'kenaa@example.com',
@@ -57,7 +58,7 @@ export default class {
          refreshToken: 'jricio1234df',
       }
       const user = new User(properties)
-      const userDeleted = this.userApplication.delete(user)
+      const userDeleted = this.userApplication.update(user)
       res.json(userDeleted)
    }
 }

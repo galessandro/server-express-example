@@ -22,43 +22,30 @@ class UserRouter {
       // this.expressRouter.get('/list', controller.list)
 
       // forma 2
-      this.expressRouter.get('/list', (req, res) => {
-         controller.list(req, res)
-      })
-
-      this.expressRouter.get('/list/:id', (req, res) => {
-         controller.listOne(req, res)
-      })
-
-      this.expressRouter.get('/insert', (req, res) => {
-         controller.insert(req, res)
-      })
-
-      this.expressRouter.get('/update', (req, res) => {
-         controller.update(req, res)
-      })
-
-      this.expressRouter.get('/delete', (req, res) => {
-         controller.delete(req, res)
-      })
-
-      // this.expressRouter.get('/description', (req, res) => {
-      //    res.send('User: German')
-      // })
+      this.expressRouter.get('/', controller.list)
+      this.expressRouter.get('/:guid', controller.listOne)
+      this.expressRouter.post('/', controller.insert)
+      this.expressRouter.put('/:guid', controller.update)
+      this.expressRouter.delete('/:guid', controller.delete)
 
       // this.expressRouter.get('/list', (req, res) => {
-      //    res.json([
-      //       { username: 'ggranados', active: true },
-      //       { username: 'mbaldeon', active: true },
-      //    ])
+      //    controller.list(req, res)
       // })
 
-      // this.expressRouter.get('/detail', (req, res) => {
-      //    res.json({ username: 'ggranados', active: true })
+      // this.expressRouter.get('/list/:guid', (req, res) => {
+      //    controller.listOne(req, res)
+      // })
+
+      // this.expressRouter.get('/insert', (req, res) => {
+      //    controller.insert(req, res)
+      // })
+
+      // this.expressRouter.get('/update', (req, res) => {
+      //    controller.update(req, res)
       // })
 
       // this.expressRouter.get('/delete', (req, res) => {
-      //    res.send('User deleted successfully')
+      //    controller.delete(req, res)
       // })
    }
 }
