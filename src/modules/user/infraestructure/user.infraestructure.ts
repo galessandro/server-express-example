@@ -1,46 +1,35 @@
-import User from '../domain/user'
+import User, { UserProperties } from '../domain/user'
+import UserFactory from '../domain/user-factory'
 import { UserRepository } from '../domain/user.repository'
+import { EmailVO } from '../domain/value-objects/email.vo'
 
-const users: User[] = [
-   new User({
-      name: 'German',
-      lastname: 'Granados',
-      email: 'granados@gmail.com',
-      password: 'ggranados08',
-      active: true,
-      refreshToken: 'abc123',
-   }),
-   new User({
-      name: 'French',
-      lastname: 'Granados',
-      email: 'french@gmail.com',
-      password: 'gfrench08',
-      active: true,
-      refreshToken: 'abcd1234',
-   }),
+let users: User[] = []
+
+const promisesUsers = [
+   new UserFactory().create('German', 'Granados', EmailVO.create('ggranados@gmail.com'), 'ggranados1234'),
+   new UserFactory().create('Mateo', 'Granados', EmailVO.create('mgranados@gmail.com'), 'mgranados09867'),
 ]
 
+Promise.all(promisesUsers).then(result => (users = result))
+
 export default class UserInfraestructure implements UserRepository {
-   list(): any {
-      return users
+   list(): UserProperties[] {
+      return users.filter((el: User) => el.properties().active).map((el: User) => el.properties())
    }
 
    listOne(guid: string): User {
-      const user: User = Object.assign(
-         {},
-         users.find((el: User) => el.properties().guid === guid),
-      )
-      console.log('user list', user)
-      return user
+      return users.filter((el: User) => el.properties().active).find((el: User) => el.properties().guid === guid)
    }
 
-   insert(user: User): any {
-      console.log('user inserted', user)
-      return user
+   insert(user: User): UserProperties {
+      users.push(user)
+      return user.properties()
    }
 
-   update(user: User): any {
-      console.log('user updated', user)
-      return user
+   update(user: User): UserProperties {
+      const { guid } = user.properties()
+      const userIndex: number = users.findIndex((el: User) => el.properties().guid === guid)
+      users[userIndex] = user
+      return user.properties()
    }
 }

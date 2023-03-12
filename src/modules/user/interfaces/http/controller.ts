@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import UserApplication from '../../application/user.application'
 import User, { UserProperties } from '../../domain/user'
+import { EmailVO } from '../../domain/value-objects/email.vo'
 
 export default class {
    constructor(private userApplication: UserApplication) {
@@ -19,15 +20,15 @@ export default class {
    }
 
    listOne(req: Request, res: Response) {
-      //const user = this.userApplication.listOne(guid)
-      //res.json(user)
+      const user = this.userApplication.listOne(req.params.guid)
+      res.json(user)
    }
 
    insert(req: Request, res: Response) {
       const properties: UserProperties = {
          name: 'John Doe',
          lastname: 'Doe',
-         email: 'kenaa@example.com',
+         email: EmailVO.create('kenaa@example.com'),
          password: '123456',
          refreshToken: 'jricio1234df',
       }
@@ -40,7 +41,7 @@ export default class {
       const properties: UserProperties = {
          name: 'John Doe',
          lastname: 'Doe',
-         email: 'kenaa@example.com',
+         email: EmailVO.create('kenaa@example.com'),
          password: '123456',
          refreshToken: 'jricio1234df',
       }
@@ -53,7 +54,7 @@ export default class {
       const properties: UserProperties = {
          name: 'John Doe',
          lastname: 'Doe',
-         email: 'kenaa@example.com',
+         email: EmailVO.create('kenaa@example.com'),
          password: '123456',
          refreshToken: 'jricio1234df',
       }
