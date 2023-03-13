@@ -5,7 +5,7 @@ interface UserDTO {
    name: string
    lastname: string
    email: string
-   guide: string
+   guid: string
 }
 
 export type UserListOneDTO = UserDTO
@@ -16,7 +16,7 @@ export class UserListOneMapping extends DTO<UserProperties, UserListOneDTO> {
          name: data.name,
          lastname: data.lastname,
          email: data.email.value,
-         guide: data.guid,
+         guid: data.guid,
       }
    }
 }

@@ -9,12 +9,19 @@ class App {
    constructor() {
       this.expressApp = express()
       this.mounthHealthCheck()
+      this.mountMiddlewares()
       this.mountRoutes()
       this.mountErrors()
    }
 
    mounthHealthCheck() {
       this.expressApp.use('/', routerHealth)
+   }
+
+   //no ocupren bodyParser = deprecated
+   mountMiddlewares() {
+      this.expressApp.use(express.json())
+      this.expressApp.use(express.urlencoded({ extended: true }))
    }
 
    mountRoutes() {
