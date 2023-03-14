@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import routerHealth from './helpers/health'
 import routerUsers from './modules/user/interfaces/http/router'
+import routerPatients from './modules/patient/interfaces/http/router'
 import HandlerErrors from './helpers/errors'
 
 class App {
@@ -26,6 +27,7 @@ class App {
 
    mountRoutes() {
       this.expressApp.use('/user', routerUsers)
+      this.expressApp.use('/patient', routerPatients)
    }
 
    mountErrors(): void {
