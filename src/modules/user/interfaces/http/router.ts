@@ -19,11 +19,11 @@ class UserRouter {
    mounRoutes() {
       // design pattern: chain of responsability https://refactoring.guru/design-patterns/chain-of-responsibility
       // forma 1
-      this.expressRouter.get('/', controller.list)
-      this.expressRouter.get('/:guid', controller.listOne)
+      // this.expressRouter.get('/', controller.list)
+      // this.expressRouter.get('/:guid', controller.listOne)
       this.expressRouter.post('/', controller.insert)
-      this.expressRouter.put('/:guid', controller.update)
-      this.expressRouter.delete('/:guid', controller.delete)
+      // this.expressRouter.put('/:guid', controller.update)
+      // this.expressRouter.delete('/:guid', controller.delete)
 
       // forma 2
       // this.expressRouter.get('/list', (req, res) => {

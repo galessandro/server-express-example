@@ -30,7 +30,7 @@ export default class User implements IEntity<UserProperties, UserUpdate> {
    private lastname: string
    private readonly email: EmailVO
    private password: string
-   private refreshtoken: string
+   private refreshToken: string
    private active: boolean
    private readonly guid: string
 
@@ -46,7 +46,7 @@ export default class User implements IEntity<UserProperties, UserUpdate> {
          lastname: this.lastname,
          email: this.email,
          password: this.password,
-         refreshToken: this.refreshtoken,
+         refreshToken: this.refreshToken,
          active: this.active,
          guid: this.guid,
       }

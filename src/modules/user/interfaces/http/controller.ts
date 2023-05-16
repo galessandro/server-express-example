@@ -12,50 +12,50 @@ export default class {
    constructor(private userApplication: UserApplication) {
       // design patt ern: links of methods
       //forma 1
-      this.list = this.list.bind(this)
-      this.listOne = this.listOne.bind(this)
+      // this.list = this.list.bind(this)
+      // this.listOne = this.listOne.bind(this)
       this.insert = this.insert.bind(this)
-      this.update = this.update.bind(this)
-      this.delete = this.delete.bind(this)
+      // this.update = this.update.bind(this)
+      // this.delete = this.delete.bind(this)
    }
 
-   list(req: Request, res: Response) {
-      const list = this.userApplication.list()
-      const result: UserListDTO = new UserListMapping().execute(list)
-      res.json(result)
-   }
+   // list(req: Request, res: Response) {
+   //    const list = this.userApplication.list()
+   //    const result: UserListDTO = new UserListMapping().execute(list)
+   //    res.json(result)
+   // }
 
-   listOne(req: Request, res: Response) {
-      const { guid } = req.params
-      const user = this.userApplication.listOne(guid)
-      const result: UserListOneDTO = new UserListOneMapping().execute(user.properties())
-      res.json(result)
-   }
+   // listOne(req: Request, res: Response) {
+   //    const { guid } = req.params
+   //    const user = this.userApplication.listOne(guid)
+   //    const result: UserListOneDTO = new UserListOneMapping().execute(user.properties())
+   //    res.json(result)
+   // }
 
    async insert(req: Request, res: Response) {
       const { name, lastname, email, password } = req.body
       const user: User = await new UserFactory().create(name, lastname, EmailVO.create(email), password)
 
-      const userInserted = this.userApplication.insert(user)
-      const result: UserInsertOneDTO = new UserInsertMapping().execute(userInserted)
+      const userInserted = await this.userApplication.insert(user)
+      const result: UserInsertOneDTO = new UserInsertMapping().execute(userInserted.properties())
       res.json(result)
    }
 
-   update(req: Request, res: Response) {
-      const { guid } = req.params
-      const { name, lastname, email, password } = req.body
-      const user = this.userApplication.listOne(guid)
-      user.update({ name, lastname, email: EmailVO.create(email), password })
-      const userUpdated = this.userApplication.update(user)
-      res.json(userUpdated)
-   }
+   // update(req: Request, res: Response) {
+   //    const { guid } = req.params
+   //    const { name, lastname, email, password } = req.body
+   //    const user = this.userApplication.listOne(guid)
+   //    user.update({ name, lastname, email: EmailVO.create(email), password })
+   //    const userUpdated = this.userApplication.update(user)
+   //    res.json(userUpdated)
+   // }
 
-   delete(req: Request, res: Response) {
-      const { guid } = req.params
-      const user = this.userApplication.listOne(guid)
-      user.delete()
-      const userDeleted = this.userApplication.update(user)
-      const result = new UserDeleteDTO().execute(userDeleted)
-      res.json(result)
-   }
+   // delete(req: Request, res: Response) {
+   //    const { guid } = req.params
+   //    const user = this.userApplication.listOne(guid)
+   //    user.delete()
+   //    const userDeleted = this.userApplication.update(user)
+   //    const result = new UserDeleteDTO().execute(userDeleted)
+   //    res.json(result)
+   // }
 }
