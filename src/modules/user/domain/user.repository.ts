@@ -1,9 +1,12 @@
-import User from './user'
+import { Result } from 'neverthrow'
+import { UserNotFoundException } from './exceptions/user.exception'
+import User, { UserUpdate } from './user'
 
 export interface UserRepository {
    // facade pattern: https://refactoring.guru/es/design-patterns/facade
-   // list(): Promise<User[]>
-   // listOne(guid: string): Promise<User>
+   list(): Promise<User[]>
+   listOne(guid: string): Promise<Result<User, UserNotFoundException>>
    insert(user: User): Promise<User>
-   // update(user: User): Promise<User>
+   update(guid: string, user: Partial<UserUpdate>): Promise<Result<User, UserNotFoundException>>
+   // delete(guid: string): Promise<Result<User, UserNotFoundException>>
 }

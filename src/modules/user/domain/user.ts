@@ -15,7 +15,7 @@ interface UserOptional {
    guid: string
 }
 
-type UserUpdate = {
+export type UserUpdate = {
    name: string
    lastname: string
    email: EmailVO
