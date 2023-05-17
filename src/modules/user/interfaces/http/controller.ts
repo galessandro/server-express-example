@@ -1,12 +1,13 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import UserApplication from '../../application/user.application'
 import User from '../../domain/user'
-import UserFactory from '../../domain/user-factory'
+import UserFactory, { UserResult } from '../../domain/user-factory'
 import { EmailVO } from '../../domain/value-objects/email.vo'
 import { UserDeleteDTO } from './dto/response/user-delete.dto'
 import { UserInsertMapping, UserInsertOneDTO } from './dto/response/user-insert.dto'
 import { UserListOneDTO, UserListOneMapping } from './dto/response/user-list-one.dto'
 import { UserListDTO, UserListMapping } from './dto/response/user-list.dto'
+import { IError } from './helpers/ierror'
 
 export default class {
    constructor(private userApplication: UserApplication) {
@@ -32,11 +33,22 @@ export default class {
    //    res.json(result)
    // }
 
-   async insert(req: Request, res: Response) {
+   async insert(req: Request, res: Response, next: NextFunction) {
       const { name, lastname, email, password } = req.body
-      const user: User = await new UserFactory().create(name, lastname, EmailVO.create(email), password)
+      const emailResult = EmailVO.create(email)
+      if(emailResult.isErr()){
+         const err: IError = new Error(emailResult.error.message)
+         err.status = 411
+         return next(err)
+      }
+      const userResult = await new UserFactory().create(name, lastname, emailResult.value, password)
 
-      const userInserted = await this.userApplication.insert(user)
+      if(userResult.isErr()) {
+         const err: IError = new Error(userResult.error.message);
+         return next(err)
+      }
+
+      const userInserted = await this.userApplication.insert(userResult.value)
       const result: UserInsertOneDTO = new UserInsertMapping().execute(userInserted.properties())
       res.json(result)
    }

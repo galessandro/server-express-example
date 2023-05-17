@@ -1,21 +1,24 @@
+import { err, ok, Result } from 'neverthrow'
 import { ValueObject } from './vo.class'
+import { UserEmailInvalidException } from '../exceptions/user.exception'
 
 interface EmailProps {
    value: string
 }
+
+export type EmailResult = Result<EmailVO, UserEmailInvalidException>
 
 export class EmailVO extends ValueObject<EmailProps> {
    private constructor(props: EmailProps) {
       super(props)
    }
 
-   static create(email: string): EmailVO {
+   static create(email: string): EmailResult {
       if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gi)) {
-         // eslint-disable-next-line quotes
-         throw new Error(`It's not a valid email`)
+         return err(new UserEmailInvalidException())
       }
 
-      return new EmailVO({ value: email })
+      return ok(new EmailVO({ value: email }))
    }
 
    get value(): string {

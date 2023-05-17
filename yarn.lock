@@ -1349,6 +1349,11 @@ negotiator@0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
+neverthrow@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/neverthrow/-/neverthrow-6.0.0.tgz#bacd7661cade296ccc5c35760bb3b679214155b6"
+  integrity sha512-kPZKRs4VkdloCGQXPoP84q4sT/1Z+lYM61AXyV8wWa2hnuo5KpPBF2S3crSFnMrOgUISmEBP8Vo/ngGZX60NhA==
+
 nodemon@2.0.20:
   version "2.0.20"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.20.tgz#e3537de768a492e8d74da5c5813cb0c7486fc701"
@@ -1838,7 +1843,7 @@ type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typeorm@^0.3.16:
+typeorm@0.3.16:
   version "0.3.16"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.3.16.tgz#a001d77b36cfaaf9ff495e15805dd17883116b7b"
   integrity sha512-wJ4Qy1oqRKNDdZiBTTaVMqwo/XxC52Q7uNPTjltPgLhvIW173bL6Iad0lhptMOsFlpixFPaUu3PNziaRBwX2Zw==
